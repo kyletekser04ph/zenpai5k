@@ -33,7 +33,10 @@
     "note": {
       "delayPerGroup": 250
     },
-    "datetime": {}
+    "datetime": {},
+    "antiout": {
+      "deltaNext": 5
+    }
   },
   "envEvents": {
     "logsbot": {
