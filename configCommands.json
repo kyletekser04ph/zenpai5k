@@ -39,5 +39,6 @@
     "logsbot": {
       "allow": true
     }
-  }
+  },
+  "commandUnload": []
 }

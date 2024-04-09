@@ -1,78 +1,78 @@
-const axios = require('axios');
-
-async function fetchDataFromAPI(apiUrl) {
-  try {
-    const response = await axios.get(apiUrl);
-    return response.data.result;
-  } catch (error) {
-    console.error("Error fetching data from API:", error.message);
-    return null;
-  }
-}
-
-async function translateText(text) {
-  try {
-    const translateUrl = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=en&dt=t&q=' + encodeURIComponent(text);
-    const response = await axios.get(translateUrl);
-    const translatedText = response.data[0][0][0];
-    return translatedText;
-  } catch (error) {
-    console.error("Error translating text:", error.message);
-    return null;
-  }
-}
+const axios = require("axios");
+const fs = require("fs");
+const path = require("path");
+let lang = "question"; 
 
 module.exports = {
-  config: {
-    name: 'truthordare',
-    aliases: ["tod"],
-    version: "1.0",
-    author: "Samir B. Thakuri",
-    countDown: 0,
-    role: 0,
-    shortDescription: {
-      en: "Play truth or dare."
+    config: {
+        name: "tod",
+        version: "1.0",
+        author: "Vex_Kshitiz",
+        role: 0,
+        shortDescription: "play truth and dare game",
+        longDescription: "play truth and dare game supports many langauge",
+        category: "game",
+        guide: {
+            en: "{p}tod [truth/dare] [lang/reset]",
+        },
     },
-    longDescription: {
-      en: "Challenge Yourself With Random Truth And Dares..."
+
+    onStart: async function ({ api, event }) {
+        const commandParts = event.body.split(' ');
+        const subCommand = commandParts[1];
+        const langCommand = commandParts[2];
+
+        console.log("r", subCommand, langCommand);
+
+        if (subCommand === "truth") {
+            await this.sendTruth(api, event, lang);
+        } else if (subCommand === "dare") {
+            await this.sendDare(api, event, lang);
+        } else if (subCommand === "lang") {
+            if (langCommand && langCommand !== "reset") {
+                if (this.isValidLanguage(langCommand)) {
+                    lang = langCommand;
+                    await api.sendMessage(`Language set to ${langCommand}`, event.threadID, event.messageID);
+                } else {
+                    await api.sendMessage(`Language '${langCommand}' not available.\nAvailable languages are: bn, de, es, fr, hi, tl`, event.threadID, event.messageID);
+                }
+            } else if (langCommand === "reset") {
+                lang = "question"; 
+                await api.sendMessage(`Language reset to default`, event.threadID, event.messageID);
+            } else {
+                await api.sendMessage("Invalid language command.\nUse 'reset' to reset to the default language\nor provide a language code\n(e.g., 'bn' for Bengali)", event.threadID, event.messageID);
+            }
+        } else {
+            await api.sendMessage("Invalid command. ex: tod truth or tod dare\nto select language tod lang {lang}", event.threadID, event.messageID);
+        }
     },
-    category: 'game',
-    guide: {
-      en: "{pn}[truth/t] or {pn}[dare/d]"
-    }
-  },
-  onStart: async function ({ api, event, args }) {
-    const { threadID, messageID } = event;
 
-    if (args.length < 1) {
-      return api.sendMessage("Incorrect syntax!", threadID, messageID);
-    }
+    isValidLanguage: function(lang) {
+        const availableLanguages = ["bn", "de", "es", "fr", "hi", "tl"];
+        return availableLanguages.includes(lang);
+    },
 
-    const option = args[0].toLowerCase();
-    const validOptions = ["truth", 't', "dare", 'd'];
+    sendTruth: async function (api, event, lang) {
+        try {
+            const response = await axios.get("https://api.truthordarebot.xyz/v1/truth");
+            const question = response.data.translations[lang] || response.data.question;
 
-    if (!validOptions.includes(option)) {
-      return api.sendMessage("Incorrect syntax!", threadID, messageID);
-    }
+            await api.sendMessage(`${question}`, event.threadID, event.messageID);
+        } catch (error) {
+            console.error("Error fetching truth question:", error);
+            await api.sendMessage("Error fetching truth question", event.threadID, event.messageID);
+        }
+    },
 
-    const apiUrl = option === "truth" || option === 't' ?
-      "https://api.zahwazein.xyz/entertainment/truth?apikey=zenzkey_92d341a7630e" :
-      "https://api.zahwazein.xyz/entertainment/dare?apikey=zenzkey_92d341a7630e";
+    sendDare: async function (api, event, lang) {
+        try {
+            const response = await axios.get("https://api.truthordarebot.xyz/v1/dare");
+            const question = response.data.translations[lang] || response.data.question;
 
-    try {
-      const question = await fetchDataFromAPI(apiUrl);
-
-      if (question) {
-        const translatedQuestion = await translateText(question);
-        return translatedQuestion ?
-          api.sendMessage(translatedQuestion, threadID, messageID) :
-          api.sendMessage("Failed to translate the question.", threadID, messageID);
-      } else {
-        return api.sendMessage("Failed to fetch truth or dare question from API.", threadID, messageID);
-      }
-    } catch (error) {
-      console.error('Error:', error.message);
-      return api.sendMessage("Failed to fetch truth or dare question from API.", threadID, messageID);
-    }
-  }
+            await api.sendMessage(`${question}`, event.threadID, event.messageID);
+        } catch (error) {
+            console.error("Error fetching dare question:", error);
+            await api.sendMessage("Error fetching dare question", event.threadID, event.messageID);
+        }
+    },
 };

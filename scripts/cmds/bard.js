@@ -1,148 +1,215 @@
-const axios = require("axios");
-const fs = require("fs");
-const gtts = require("gtts");
-const path = require("path");
+const axios = require('axios');
+const fs = require('fs-extra');
+const path = require('path');
+const ytdl = require("ytdl-core");
+const yts = require("yt-search");
+
+async function lado(api, event, args, message) {
+  try {
+    const songName = args.join(" ");
+    const searchResults = await yts(songName);
+
+    if (!searchResults.videos.length) {
+      message.reply("𝙎𝙤𝙧𝙧𝙮 𝙘𝙪𝙧𝙧𝙚𝙣𝙩𝙡𝙮 𝙩𝙝𝙚 𝙨𝙤𝙣𝙜 𝙞𝙨 𝙣𝙤𝙩 𝙖𝙫𝙖𝙡𝙖𝙞𝙗𝙡𝙚.");
+      return;
+    }
+
+    const video = searchResults.videos[0];
+    const videoUrl = video.url;
+    const stream = ytdl(videoUrl, { filter: "audioonly" });
+    const fileName = `music.mp3`; 
+    const filePath = path.join(__dirname, "tmp", fileName);
+
+    stream.pipe(fs.createWriteStream(filePath));
+
+    stream.on('response', () => {
+      console.info('[DOWNLOADER]', 'Starting download now!');
+    });
+
+    stream.on('info', (info) => {
+      console.info('[DOWNLOADER]', `Downloading ${info.videoDetails.title} by ${info.videoDetails.author.name}`);
+    });
+
+    stream.on('end', () => {
+      const audioStream = fs.createReadStream(filePath);
+      message.reply({ attachment: audioStream });
+      api.setMessageReaction("✅", event.messageID, () => {}, true);
+    });
+  } catch (error) {
+    console.error("Error:", error);
+    message.reply("𝘼𝙣 𝙘𝙤𝙣𝙨𝙤𝙡𝙚 𝙚𝙧𝙧𝙤𝙧 𝙤𝙘𝙘𝙪𝙧𝙚𝙙.");
+  }
+}
+
+async function kshitiz(api, event, args, message) {
+  try {
+    const query = args.join(" ");
+    const searchResults = await yts(query);
+
+    if (!searchResults.videos.length) {
+      message.reply("𝙎𝙤𝙧𝙧𝙮 𝙘𝙪𝙧𝙧𝙚𝙣𝙩𝙡𝙮 𝙩𝙝𝙚 𝙫𝙞𝙙𝙚𝙤 𝙣𝙤𝙩 𝙛𝙤𝙪𝙣𝙙.");
+      return;
+    }
+
+    const video = searchResults.videos[0];
+    const videoUrl = video.url;
+    const stream = ytdl(videoUrl, { filter: "audioandvideo" }); 
+    const fileName = `music.mp4`;
+    const filePath = path.join(__dirname, "tmp", fileName);
+
+    stream.pipe(fs.createWriteStream(filePath));
+
+    stream.on('response', () => {
+      console.info('[DOWNLOADER]', 'Starting download now!');
+    });
+
+    stream.on('info', (info) => {
+      console.info('[DOWNLOADER]', `Downloading ${info.videoDetails.title} by ${info.videoDetails.author.name}`);
+    });
+
+    stream.on('end', () => {
+      const videoStream = fs.createReadStream(filePath);
+      message.reply({ attachment: videoStream });
+      api.setMessageReaction("✅", event.messageID, () => {}, true);
+    });
+  } catch (error) {
+    console.error(error);
+    message.reply("𝙎𝙤𝙧𝙧𝙮 𝙖𝙣 𝙚𝙧𝙧𝙤𝙧 𝙤𝙘𝙘𝙪𝙧𝙚𝙙 𝙩𝙤 𝙩𝙝𝙚 𝙘𝙤𝙣𝙨𝙤𝙡𝙚.");
+  }
+}
+
+async function b(c, d, e, f) {
+  try {
+    const g = await axios.get(`https://gemini-ai-pearl-two.vercel.app/kshitiz?prompt=${encodeURIComponent(c)}&uid=${d}&apikey=kshitiz`);
+    return g.data.answer;
+  } catch (h) {
+    throw h;
+  }
+}
+
+async function i(c) {
+  try {
+    const j = await axios.get(`https://sdxl-kshitiz.onrender.com/gen?prompt=${encodeURIComponent(c)}&style=3`);
+    return j.data.url;
+  } catch (k) {
+    throw k;
+  }
+}
+
+async function describeImage(prompt, photoUrl) {
+  try {
+    const url = `https://sandipbaruwal.onrender.com/gemini2?prompt=${encodeURIComponent(prompt)}&url=${encodeURIComponent(photoUrl)}`;
+    const response = await axios.get(url);
+    return response.data.answer;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function l({ api, message, event, args }) {
+  try {
+    const m = event.senderID;
+    let n = "";
+    let draw = false;
+    let sendTikTok = false;
+    let sing = false;
+
+    if (args[0].toLowerCase() === "draw") {
+      draw = true;
+      n = args.slice(1).join(" ").trim();
+    } else if (args[0].toLowerCase() === "send") {
+      sendTikTok = true;
+      n = args.slice(1).join(" ").trim();
+    } else if (args[0].toLowerCase() === "sing") {
+      sing = true;
+      n = args.slice(1).join(" ").trim();
+    } else if (event.messageReply && event.messageReply.attachments && event.messageReply.attachments.length > 0) {
+      const photoUrl = event.messageReply.attachments[0].url;
+      n = args.join(" ").trim();
+      const description = await describeImage(n, photoUrl);
+      message.reply(`Description: ${description}`);
+      return;
+    } else {
+      n = args.join(" ").trim();
+    }
+
+    if (!n) {
+      return message.reply("𝙋𝙡𝙚𝙖𝙨𝙚 𝙬𝙧𝙞𝙩𝙚 𝙨𝙤𝙢𝙚𝙩𝙝𝙞𝙣𝙜");
+    }
+
+    if (draw) {
+      await drawImage(message, n);
+    } else if (sendTikTok) {
+      await kshitiz(api, event, args.slice(1), message); 
+    } else if (sing) {
+      await lado(api, event, args.slice(1), message); 
+    } else {
+      const q = await b(n, m);
+      message.reply(q, (r, s) => {
+        global.GoatBot.onReply.set(s.messageID, {
+          commandName: a.name,
+          uid: m 
+        });
+      });
+    }
+  } catch (t) {
+    console.error("Error:", t.message);
+    message.reply("𝙎𝙤𝙧𝙧𝙮 𝙖𝙣 𝙘𝙤𝙣𝙨𝙤𝙡𝙚 𝙚𝙧𝙧𝙤𝙧 𝙤𝙘𝙘𝙪𝙧𝙚𝙙");
+  }
+}
+
+async function drawImage(message, prompt) {
+  try {
+    const u = await i(prompt);
+
+    const v = path.join(__dirname, 'cache', `image_${Date.now()}.png`);
+    const writer = fs.createWriteStream(v);
+
+    const response = await axios({
+      url: u,
+      method: 'GET',
+      responseType: 'stream'
+    });
+
+    response.data.pipe(writer);
+
+    return new Promise((resolve, reject) => {
+      writer.on('finish', resolve);
+      writer.on('error', reject);
+    }).then(() => {
+      message.reply({
+        body: "Generated image:",
+        attachment: fs.createReadStream(v)
+      });
+    });
+  } catch (w) {
+    console.error("Error:", w.message);
+    message.reply("𝙎𝙤𝙧𝙧𝙮 𝙖𝙣 𝙚𝙧𝙧𝙤𝙧 𝙬𝙖𝙨 𝙤𝙘𝙘𝙪𝙧𝙚𝙙 𝙞𝙣 𝘾𝙤𝙣𝙨𝙤𝙡𝙚");
+  }
+}
+
+const a = {
+  name: "gemini",
+  aliases: ["bard"],
+  version: "4.0",
+  author: "vex_kshitiz",
+  𝙢𝙤𝙙𝙞𝙛𝙞𝙚𝙙𝙗𝙮:"𝙈𝙧 𝙥𝙚𝙧𝙛𝙚𝙘𝙩",
+  countDown: 0,
+  role: 0,
+  longDescription: "Chat with gemini",
+  category: "ai",
+  guide: {
+    en: "{p}gemini {prompt}"
+  }
+};
 
 module.exports = {
-  config: {
-    name: "bard",
-    aliases: [],
-    version: "1.0",
-    author: "Arjhil x kshitiz",
-    countDown: 5,
-    role: 0,
-    shortDescription: {
-      vi: "",
-      en: ""
-    },
-    longDescription: {
-      vi: "Bard AI, Pinterest Image Search, and gTTS",
-      en: "Bard AI, Pinterest Image Search, and gTTS"
-    },
-    category: "ai",
-    guide: {
-      vi: "",
-      en: "{pn}<query>"
-    }
+  config: a,
+  handleCommand: l,
+  onStart: function ({ api, message, event, args }) {
+    return l({ api, message, event, args });
   },
-  langs: {
-    vi: {
-      null: ""
-    },
-    en: {
-      null: ""
-    }
-  },
-  async onStart({ api, args, message, event }) {
-    const { threadID, messageID, type, messageReply, body } = event;
-    let question = "";
-
-    async function convertImageToText(imageURL) {
-      try {
-        const response = await axios.get(
-          `https://bard-ai.arjhilbard.repl.co/api/other/img2text?input=${encodeURIComponent(imageURL)}`
-        );
-        return response.data.extractedText;
-      } catch (error) {
-        console.error("Error converting image to text:", error);
-        return null;
-      }
-    }
-
-    function formatFont(text) {
-      const fontMapping = {
-        a: "𝖺", b: "𝖻", c: "𝖼", d: "𝖽", e: "𝖾", f: "𝖿", g: "𝗀", h: "𝗁", i: "𝗂", j: "𝗃", k: "𝗄", l: "𝗅", m: "𝗆",
-        n: "𝗇", o: "𝗈", p: "𝗉", q: "𝗊", r: "𝗋", s: "𝗌", t: "𝗍", u: "𝗎", v: "𝗏", w: "𝗐", x: "𝗑", y: "𝗒", z: "𝗓",
-        A: "𝖠", B: "𝖡", C: "𝖢", D: "𝖣", E: "𝖤", F: "𝖥", G: "𝖦", H: "𝖧", I: "𝖨", J: "𝖩", K: "𝖪", L: "𝖫", M: "𝖬",
-        N: "𝖭", O: "𝖮", P: "𝖯", Q: "𝖰", R: "𝖱", S: "𝖲", T: "𝖳", U: "𝖴", V: "𝖵", W: "𝖶", X: "𝖷", Y: "𝖸", Z: "𝖹",
-      };
-
-      let formattedText = "";
-      for (const char of text) {
-        if (char in fontMapping) {
-          formattedText += fontMapping[char];
-        } else {
-          formattedText += char;
-        }
-      }
-      return formattedText;
-    }
-
-    if (type === "message_reply" && messageReply.attachments[0]?.type === "photo") {
-      const attachment = messageReply.attachments[0];
-      const imageURL = attachment.url;
-      question = await convertImageToText(imageURL);
-
-      if (!question) {
-        api.sendMessage("❌ Failed to convert the image to text. Please try again with a clearer image.", threadID, messageID);
-        return;
-      }
-    } else {
-      question = args.join(" ").trim();
-
-      if (!question) {
-        api.sendMessage("Please provide a question or inquiry.", threadID, messageID);
-        return;
-      }
-    }
-
-    api.sendMessage("🔎 Searching, please wait...", threadID, messageID);
-
-    try {
-      const bardResponse = await axios.get(`https://bard-ai.arjhilbard.repl.co/bard?ask=${encodeURIComponent(question)}`);
-      const bardData = bardResponse.data;
-      const bardMessage = bardData.message;
-
-      const pinterestResponse = await axios.get(`https://api-all-1.arjhilbard.repl.co/pinterest?search=${encodeURIComponent(question)}`);
-      const pinterestImageUrls = pinterestResponse.data.data.slice(0, 6);
-
-      const pinterestImageAttachments = [];
-
-      const cacheDir = path.join(__dirname, 'cache');
-      if (!fs.existsSync(cacheDir)) {
-        fs.mkdirSync(cacheDir);
-      }
-
-      for (let i = 0; i < pinterestImageUrls.length; i++) {
-        const imageUrl = pinterestImageUrls[i];
-        try {
-          const imageResponse = await axios.get(imageUrl, { responseType: "arraybuffer" });
-          const imagePath = path.join(cacheDir, `pinterest_image${i + 1}.jpg`);
-          fs.writeFileSync(imagePath, Buffer.from(imageResponse.data, "binary"));
-          pinterestImageAttachments.push(fs.createReadStream(imagePath));
-        } catch (error) {
-          console.error("Error fetching Pinterest image:", error);
-        }
-      }
-
-      const formattedBardAnswer = `📝 Result: ${formatFont(bardMessage)}`;
-      api.sendMessage(formattedBardAnswer, threadID);
-
-      const gttsPath = path.join(cacheDir, 'voice.mp3');
-      const gttsInstance = new gtts(bardMessage, 'ar');
-      gttsInstance.save(gttsPath, function (error, result) {
-        if (error) {
-          console.error("Error saving gTTS:", error);
-        } else {
-          api.sendMessage({
-            body: "🗣️ Voice Answer:",
-            attachment: fs.createReadStream(gttsPath)
-          }, threadID);
-        }
-      });
-
-      if (pinterestImageAttachments.length > 0) {
-        api.sendMessage(
-          {
-            attachment: pinterestImageAttachments,
-            body: `📷 Image Search Results for: ${question}  `,
-          },
-          threadID
-        );
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      api.sendMessage("❌ An error occurred while processing the request.", threadID, messageID);
-    }
+  onReply: function ({ api, message, event, args }) {
+    return l({ api, message, event, args });
   }
 };
