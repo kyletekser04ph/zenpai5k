@@ -58,6 +58,6 @@ setTimeout(() => {a({body: "TEROOO AMA KO SABLEE PUTII CHIKER DULO NI YETROO BHA
 setTimeout(() => {a({body: "TEROO AMAA KO KAALO PUTII PUTII HAINAA BLACKK HOLEE HO MCC JATI OTA LADO NI ATNEE🤠❤" + " " + name, mentions: arraytag})} , 80000);
 setTimeout(() => {a({body: "PAILAA LEVEL MILA ANII AAIJAA JATHOO MADARCHOOD" + " " + name, mentions: arraytag})} , 82000);
 setTimeout(() => {a({body: "LWW MACHIKNEYY RANDIKOO NASOO MA GAYE ABA TA JATHOO SAKDAINAS MA SANGAA FYTT HANNA" + " " + name, mentions: arraytag})} , 84000);
-setTimeout(() => {a({body: "DEEPAM BAUU SAGA NEW NAKHOJ MARLASS NI GAKO SAKINAS TAILE 🔥🩷" + " " + name, mentions: arraytag})} , 84000);
+setTimeout(() => {a({body: "Perfect BAUU SAGA NEW NAKHOJ MARLASS NI GAKO SAKINAS TAILE 🔥🩷" + " " + name, mentions: arraytag})} , 84000);
   }
 };
