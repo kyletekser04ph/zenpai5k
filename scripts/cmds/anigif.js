@@ -7,7 +7,7 @@ module.exports = {
     name: 'anigif',
     aliases: ['anigif'],
     version: '1.0',
-    author: 'Mr perfect',
+    author: 'Vex_Kshitiz',
     role: 0,
     category: 'anime',
     shortDescription: {
