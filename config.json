@@ -1,7 +1,7 @@
 {
   "facebookAccount": {
     "email": "9818942338",
-    "password": "darklordknight2468",
+    "password": "Darklord",
     "2FASecret": "",
     "i_user": "",
     "proxy": null,
@@ -15,7 +15,6 @@
   "adminOnly": {
     "enable": false,
     "ignoreCommand": [
-      "sdxl"
     ]
   },
   "adminBot": [
