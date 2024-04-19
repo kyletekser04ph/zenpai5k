@@ -1,67 +1,66 @@
-const { getStreamFromURL } = require("fb-watchman");
+const axios = require("axios");
+const fs = require("fs-extra");
+const path = require("path");
 
 module.exports = {
   config: {
-    name: "stats",
-    aliases: ["stat","time"],
+    name: "ddg",
     version: "1.0",
-    author: "OtinXSandip",
+    author: "Vex_Kshitiz",
     role: 0,
+    countDown: 10,
     shortDescription: {
-      en: "stats",
+      en: "Search images"
     },
-    longDescription: {
-      en: "shows stats of bot.",
-    },
-    category: "system",
+    category: "image",
     guide: {
-      en: "Use {p}stats to see stats of bot.",
-    },
+      en: "{prefix}ddg <search query> -<number of images>"
+    }
   },
 
-  onStart: async function ({ api, event, args, usersData, threadsData }) {
+  onStart: async function ({ api, event, args, usersData }) {
     try {
-      const allUsers = await usersData.getAll();
-      const allThreads = await threadsData.getAll();
-      const uptime = process.uptime();
+      const searchQuery = args.join(" ");
 
-      const hours = Math.floor(uptime / 3600);
-      const minutes = Math.floor((uptime % 3600) / 60);
-      const seconds = Math.floor(uptime % 60);
-
-      const uptimeString = `${hours}Hrs ${minutes}min ${seconds}sec`;
-
-      const currentDate = new Date();
-      const options = { year: "numeric", month: "numeric", day: "numeric" };
-      const date = currentDate.toLocaleDateString("en-US", options);
-      const time = currentDate.toLocaleTimeString("en-US", {
-        timeZone: "Asia/Kathmandu",
-        hour12: true,
-      });
-
-      const timeStart = Date.now();
-      await api.sendMessage({
-        body: "wait a sec boss🌝",
-      }, event.threadID);
-
-      const ping = Date.now() - timeStart;
-
-      let pingStatus = "Not smooth throw your router, buddy";
-      if (ping < 400) {
-        pingStatus = "Smooth like your tiny cat";
+      if (!searchQuery.includes("-")) {
+        return api.sendMessage(`Invalid format. Example: {prefix}ddg cats -5`, event.threadID, event.messageID);
       }
 
-      // Assuming global.utils.getStreamFromURL(img) is correctly defined
-      const imgURL= "https://imgur.com/GrvBRjL.gif";
-      const attachment = await global.utils.getStreamFromURL(imgURL);
+      const [query, numImages] = searchQuery.split("-").map(str => str.trim());
+      const numberOfImages = parseInt(numImages);
 
-      api.sendMessage({
-        body: `👾 | Bot running time\n☞ ${uptimeString}\n\n📅 | Date: ${date}\n\n⏰| Time: ${time}\n\n🐉 | Total Users\n☞ ${allUsers.length}\n\n🌸 | Total threads\n☞ ${allThreads.length}\n\n🌝 | Ping: ${ping}ms\n\nPing status: ${pingStatus}`,
-        attachment: attachment,
-      }, event.threadID);
+      if (isNaN(numberOfImages) || numberOfImages <= 0 || numberOfImages > 50) {
+        return api.sendMessage("Please specify a number between 1 and 50.", event.threadID, event.messageID);
+      }
+
+      const apiUrl = `https://ddg-pi.vercel.app/image?search=${encodeURIComponent(query)}`;
+      const response = await axios.get(apiUrl);
+      const imageData = response.data.images;
+
+      if (!imageData || !Array.isArray(imageData) || imageData.length === 0) {
+        return api.sendMessage(`No images found for "${query}".`, event.threadID, event.messageID);
+      }
+
+      const imgData = [];
+      for (let i = 0; i < Math.min(numberOfImages, imageData.length); i++) {
+        const imageUrl = imageData[i];
+        try {
+          const imgResponse = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+          const imgPath = path.join(__dirname, 'cache', `${i + 1}.jpg`);
+          await fs.outputFile(imgPath, imgResponse.data);
+          imgData.push(fs.createReadStream(imgPath));
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      await api.sendMessage({
+        attachment: imgData,
+        body: ``
+      }, event.threadID, event.messageID);
     } catch (error) {
       console.error(error);
-      api.sendMessage("An error occurred while retrieving data.", event.threadID);
+      return api.sendMessage(`An error occurred.`, event.threadID, event.messageID);
     }
   }
 };
