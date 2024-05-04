@@ -1,46 +1,80 @@
-const axios = require('axios');
+const fs = require("fs");
+const path = require("path");
+const axios = require("axios");
+const tinyurl = require('tinyurl');
 
 module.exports = {
   config: {
-    name: 'sdxl',
-    version: '1.0',
-    author: 'Rajveer--',
-    countDown: 50,
+    name: "sdxl",
+    aliases: [],
+    version: "1.0",
+    author: "vex_Kshitiz",
+    countDown: 20,
     role: 0,
-    longDescription: {
-      en: 'Text to Image'
-    },
-    category: 'ai',
+    shortDescription: "lado puti",
+    longDescription: "image to image",
+    category: "game",
     guide: {
-      en: `{pn} prompt and here is models u can choose
-1 | DreamshaperXL10
-2 | DynavisionXL
-3 | JuggernautXL
-4 | RealismEngineSDXL
-5 | Sdxl 1.0`
+      en: "{p}sdxl reply to image or {p}sdxl [prompt]"
     }
   },
+  onStart: async function ({ message, event, args, api }) {
+    api.setMessageReaction("🕐", event.messageID, (err) => {}, true);
+    try {
+      const promptApiUrl = "https://www.api.vyturex.com/describe?url="; 
+      const sdxlApiUrl = "https://sdxl-kshitiz.onrender.com/gen";
 
-  onStart: async function ({ message, api, args, event }) {
-    const text = args.join(' ');
+      let imageUrl = null;
+      let prompt = '';
+      let style = 3;
+      if (event.type === "message_reply") {
+        const attachment = event.messageReply.attachments[0];
+        if (!attachment || !["photo", "sticker"].includes(attachment.type)) {
+          return message.reply("❌ | Reply must be an image.");
+        }
+        imageUrl = attachment.url;
+        const promptResponse = await axios.get(promptApiUrl + encodeURIComponent(imageUrl));
+        prompt = promptResponse.data;
+      } else if (args.length > 0 && args[0].startsWith("http")) {
+        imageUrl = args[0];
+        const promptResponse = await axios.get(promptApiUrl + encodeURIComponent(imageUrl));
+        prompt = promptResponse.data;
+      } else if (args.length > 0) {
+     
+        const argParts = args.join(" ").split("|");
+        prompt = argParts[0].trim();
+        if (argParts.length > 1) {
+          style = parseInt(argParts[1].trim());
+        }
+      } else {
+        return message.reply("❌");
+      }
 
-    if (!text) {
-      return message.reply("Soraty e");
-    }
-
-    const [prompt, model] = text.split('|').map((text) => text.trim());
-    const puti = model || "2";
-    const baseURL = `https://sandipapi.onrender.com/sdxl?prompt=${prompt}&model=${puti}`;
-
-
-    message.reply("✅| Alik time lagla", async (err, info) => {
-      message.reply({ 
-body: `✅`,
-        attachment: await global.utils.getStreamFromURL(baseURL)
+      const sdxlResponse = await axios.get(sdxlApiUrl, {
+        params: {
+          prompt: prompt,
+          style: style 
+        }
       });
-      let ui = info.messageID;
-      message.unsend(ui);
 
-    });
+      if (sdxlResponse.data.status === "success") {
+        const imageUrl = sdxlResponse.data.url;
+        const imagePath = path.join(__dirname, "cache", `${Date.now()}_generated_image.png`);
+        const imageResponse = await axios.get(imageUrl, { responseType: "stream" });
+        const imageStream = imageResponse.data.pipe(fs.createWriteStream(imagePath));
+        imageStream.on("finish", () => {
+          const stream = fs.createReadStream(imagePath);
+          message.reply({
+            body: "",
+            attachment: stream
+          });
+        });
+      } else {
+        throw new Error("Image generation failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      message.reply("❌ | An error occurred. Please try again later.");
+    }
   }
 };

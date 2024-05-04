@@ -4,23 +4,23 @@ const path = require("path");
 
 module.exports = {
   config: {
-    name: "ronaldoedit",
-    aliases: [],
+    name: "aestheticgirl",
+    aliases: ["ag", "aestheticgirls", "aestheticsgirl", "aestheticsgirls"],
     author: "Vex_Kshitiz",
     version: "1.0",
     cooldowns: 30,
     role: 0,
-    shortDescription: "",
-    longDescription: "ronaldo edit",
+    shortDescription: "Get random gurls video",
+    longDescription: "Get random gurls video",
     category: "fun",
-    guide: "{p}cmdname",
+    guide: "{p}ag",
   },
 
   onStart: async function ({ api, event, args, message }) {
     api.setMessageReaction("✨", event.messageID, (err) => {}, true);
 
     try {
-      const response = await axios.get("https://ronaldo-edits.onrender.com/kshitiz");
+      const response = await axios.get("https://aesthetic-girls.onrender.com/kshitiz");
       const postData = response.data.posts;
       const randomIndex = Math.floor(Math.random() * postData.length);
       const randomPost = postData[randomIndex];
@@ -31,7 +31,7 @@ module.exports = {
 
       const videoResponse = await axios.get(selectedUrl, { responseType: "stream" });
 
-      const tempVideoPath = path.join(__dirname, "cache", `ronaldo.mp4`);
+      const tempVideoPath = path.join(__dirname, "cache", `${Date.now()}.mp4`);
       const writer = fs.createWriteStream(tempVideoPath);
       videoResponse.data.pipe(writer);
 
@@ -50,7 +50,7 @@ module.exports = {
       });
     } catch (error) {
       console.error(error);
-      message.reply("Sorry, an error occurred.");
+      message.reply("Sorry, an error occurred while processing your request.");
     }
   }
 };

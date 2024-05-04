@@ -44,7 +44,6 @@
     }
   },
   "commandUnload": [
-    "war.js",
-    "prefix.js"
+    "war.js"
   ]
 }
