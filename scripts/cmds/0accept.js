@@ -6,7 +6,7 @@ module.exports = {
     aliases: ['acp'],
     version: "1.0",
     author: "Loid Butter",
-    countDown: 8,
+    countDown: 0,
     role: 2,
     shortDescription: "accept users",
     longDescription: "accept users",
@@ -39,11 +39,11 @@ module.exports = {
 
     if (args[0] === "add") {
       form.fb_api_req_friendly_name = "FriendingCometFriendRequestConfirmMutation";
-      form.doc_id = "100087591006635";
+      form.doc_id = "3147613905362928";
     }
     else if (args[0] === "del") {
       form.fb_api_req_friendly_name = "FriendingCometFriendRequestDeleteMutation";
-      form.doc_id = "100087591006635";
+      form.doc_id = "4108254489275063";
     }
     else {
       return api.sendMessage("Please select <add | del > <target number | or \"all\">", event.threadID, event.messageID);
@@ -115,7 +115,7 @@ module.exports = {
       msg += (`\n${i}. Name: ${user.node.name}`
         + `\nID: ${user.node.id}`
         + `\nUrl: ${user.node.url.replace("www.facebook", "fb")}`
-        + `\nTime: ${eeee(user.time * 1009).tz("Asia/Manila").format("DD/MM/YYYY HH:mm:ss")}\n`);
+        + `\nTime: ${moment(user.time * 180000).tz("Asia/Kathmandu").format("DD/MM/YYYY HH:mm:ss")}\n`);
     }
     api.sendMessage(`${msg}\nReply to this message with content: <add | del> <comparison | or "all"> to take action`, event.threadID, (e, info) => {
       global.GoatBot.onReply.set(info.messageID, {
@@ -125,7 +125,7 @@ module.exports = {
         author: event.senderID,
         unsendTimeout: setTimeout(() => {
           api.unsendMessage(info.messageID); // Unsend the message after the countdown duration
-        }, this.config.countDown * 1000) // Convert countdown duration to milliseconds
+        }, this.config.countDown * 180000) // Convert countdown duration to milliseconds
       });
     }, event.messageID);
   }
