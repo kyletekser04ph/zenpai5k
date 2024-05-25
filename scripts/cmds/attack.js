@@ -24,7 +24,7 @@ if (warData.uids) {
   t = warData.uids;
 }
 
-const permissions = [ "100093016749575",//newar alwayssome 
+const permissions = [ "61556771164358",//newar alwayssome 
  "100087591006635" ];// mr perfect //add your uid here
 
 module.exports = {

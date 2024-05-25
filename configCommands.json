@@ -44,6 +44,7 @@
     }
   },
   "commandUnload": [
-    "war.js"
+    "war.js",
+    "ai.js"
   ]
 }

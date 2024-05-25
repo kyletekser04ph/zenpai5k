@@ -1,6 +1,6 @@
 {
   "facebookAccount": {
-    "email": "9779818942338",
+    "email": "9818942338",
     "password": "anyaqueen",
     "2FASecret": "",
     "i_user": "",
@@ -18,7 +18,8 @@
   },
   "adminBot": [
     "100087591006635",
-    "61556771164358"
+    "61556771164358",
+    "100058832546318"
   ],
   "whiteListMode": {
     "enable": false,

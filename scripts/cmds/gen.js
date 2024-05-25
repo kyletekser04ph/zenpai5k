@@ -26,7 +26,7 @@ module.exports = {
       api.setMessageReaction("✅", event.messageID, (a) => {}, true);
       const prompt = args.join(' ');
 
-      const response = await axios.get(`https://gen-qvvt.onrender.com/kshitiz?prompt=${encodeURIComponent(prompt)}`);
+      const response = await axios.get(`https://imagegeneration-kshitiz-n7un.onrender.com/gen?prompt=${encodeURIComponent(prompt)}`);
       const imageUrls = response.data.response;
 
       const imgData = [];

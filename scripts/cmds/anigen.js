@@ -39,7 +39,7 @@ module.exports = {
       const validRatio = ratios.hasOwnProperty(ratio) ? ratio : "1:1";
 
    
-      let apiUrl = "https://new-anigen.onrender.com/anime?prompt=" + encodeURIComponent(prompt);
+      let apiUrl = "https://imagegeneration-kshitiz-n7un.onrender.com/anigen?prompt=" + encodeURIComponent(prompt);
       if (validRatio !== "1:1") {
         apiUrl += "&ratio=" + encodeURIComponent(validRatio);
       }

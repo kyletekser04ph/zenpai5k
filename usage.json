@@ -1,11 +1,11 @@
 [
   {
     "name": "pair",
-    "usage": 94
+    "usage": 97
   },
   {
     "name": "quiz",
-    "usage": 6
+    "usage": 8
   },
   {
     "name": "remini",
@@ -13,7 +13,7 @@
   },
   {
     "name": "del",
-    "usage": 7
+    "usage": 19
   },
   {
     "name": "nyx",
@@ -21,7 +21,7 @@
   },
   {
     "name": "video",
-    "usage": 4
+    "usage": 5
   },
   {
     "name": "quiz2",
@@ -37,7 +37,7 @@
   },
   {
     "name": "stats",
-    "usage": 2
+    "usage": 3
   },
   {
     "name": "ddg",
@@ -49,11 +49,11 @@
   },
   {
     "name": "unsend",
-    "usage": 5
+    "usage": 11
   },
   {
     "name": "help",
-    "usage": 7
+    "usage": 15
   },
   {
     "name": "sauce",
@@ -65,7 +65,7 @@
   },
   {
     "name": "pvdo",
-    "usage": 2
+    "usage": 4
   },
   {
     "name": "statust",
@@ -89,7 +89,7 @@
   },
   {
     "name": "cmdstore",
-    "usage": 7
+    "usage": 21
   },
   {
     "name": "rbg",
@@ -109,7 +109,7 @@
   },
   {
     "name": "",
-    "usage": 4
+    "usage": 25
   },
   {
     "name": "pait",
@@ -117,7 +117,7 @@
   },
   {
     "name": "play",
-    "usage": 2
+    "usage": 5
   },
   {
     "name": "note",
@@ -125,7 +125,7 @@
   },
   {
     "name": "niji",
-    "usage": 1
+    "usage": 2
   },
   {
     "name": "nakama",
@@ -205,15 +205,15 @@
   },
   {
     "name": "anigen",
-    "usage": 1
+    "usage": 5
   },
   {
     "name": "tuktuk",
-    "usage": 1
+    "usage": 2
   },
   {
     "name": "anp",
-    "usage": 2
+    "usage": 10
   },
   {
     "name": "rizz2",
@@ -237,10 +237,398 @@
   },
   {
     "name": "sing",
-    "usage": 1
+    "usage": 4
   },
   {
     "name": "lv",
+    "usage": 2
+  },
+  {
+    "name": "ak",
+    "usage": 2
+  },
+  {
+    "name": "anigif",
+    "usage": 3
+  },
+  {
+    "name": "animefy",
+    "usage": 1
+  },
+  {
+    "name": "anipic",
+    "usage": 6
+  },
+  {
+    "name": "pin",
+    "usage": 3
+  },
+  {
+    "name": "zombie",
+    "usage": 2
+  },
+  {
+    "name": "callad",
+    "usage": 2
+  },
+  {
+    "name": "roast",
+    "usage": 21
+  },
+  {
+    "name": "rankup",
+    "usage": 1
+  },
+  {
+    "name": "anya",
+    "usage": 3
+  },
+  {
+    "name": "unsemd",
+    "usage": 1
+  },
+  {
+    "name": "paid",
+    "usage": 1
+  },
+  {
+    "name": "gpt",
+    "usage": 3
+  },
+  {
+    "name": "spy",
+    "usage": 4
+  },
+  {
+    "name": "emi",
+    "usage": 1
+  },
+  {
+    "name": "anime",
+    "usage": 3
+  },
+  {
+    "name": "prefix",
+    "usage": 2
+  },
+  {
+    "name": "info",
+    "usage": 1
+  },
+  {
+    "name": "owner",
+    "usage": 1
+  },
+  {
+    "name": "aniedit2",
+    "usage": 1
+  },
+  {
+    "name": "aniedit",
+    "usage": 1
+  },
+  {
+    "name": "fight",
+    "usage": 2
+  },
+  {
+    "name": "l",
+    "usage": 1
+  },
+  {
+    "name": "up",
+    "usage": 2
+  },
+  {
+    "name": "autoseen",
+    "usage": 2
+  },
+  {
+    "name": "clean",
+    "usage": 3
+  },
+  {
+    "name": "ping",
+    "usage": 1
+  },
+  {
+    "name": "acp",
+    "usage": 5
+  },
+  {
+    "name": "admin",
+    "usage": 3
+  },
+  {
+    "name": "adc",
+    "usage": 2
+  },
+  {
+    "name": "uid",
+    "usage": 3
+  },
+  {
+    "name": "edit",
+    "usage": 1
+  },
+  {
+    "name": "ffedit",
+    "usage": 2
+  },
+  {
+    "name": "antiout",
+    "usage": 2
+  },
+  {
+    "name": "qrcode",
+    "usage": 4
+  },
+  {
+    "name": "adduser",
+    "usage": 1
+  },
+  {
+    "name": "adminassist",
+    "usage": 1
+  },
+  {
+    "name": "add",
+    "usage": 1
+  },
+  {
+    "name": "astheticgirl",
+    "usage": 1
+  },
+  {
+    "name": "aestheticgirl",
+    "usage": 3
+  },
+  {
+    "name": "rank",
+    "usage": 3
+  },
+  {
+    "name": "weather",
+    "usage": 1
+  },
+  {
+    "name": "daily",
+    "usage": 2
+  },
+  {
+    "name": "hourly",
+    "usage": 1
+  },
+  {
+    "name": "balance",
+    "usage": 1
+  },
+  {
+    "name": "porn",
+    "usage": 1
+  },
+  {
+    "name": "album",
+    "usage": 4
+  },
+  {
+    "name": "💋",
+    "usage": 1
+  },
+  {
+    "name": "all",
+    "usage": 1
+  },
+  {
+    "name": "animeinfi",
+    "usage": 1
+  },
+  {
+    "name": "animeinfo",
+    "usage": 1
+  },
+  {
+    "name": "news",
+    "usage": 1
+  },
+  {
+    "name": "animememe",
+    "usage": 1
+  },
+  {
+    "name": "animenews",
+    "usage": 1
+  },
+  {
+    "name": "animesong",
+    "usage": 1
+  },
+  {
+    "name": "animevideo",
+    "usage": 2
+  },
+  {
+    "name": "gemini",
+    "usage": 4
+  },
+  {
+    "name": "pi",
+    "usage": 1
+  },
+  {
+    "name": "anivid",
+    "usage": 1
+  },
+  {
+    "name": "anitrace",
+    "usage": 2
+  },
+  {
+    "name": "aniquotes",
+    "usage": 3
+  },
+  {
+    "name": "aniquotes1",
+    "usage": 1
+  },
+  {
+    "name": "aniquotes2",
+    "usage": 1
+  },
+  {
+    "name": "aniquote",
+    "usage": 2
+  },
+  {
+    "name": "cnd",
+    "usage": 1
+  },
+  {
+    "name": "anisearch",
+    "usage": 1
+  },
+  {
+    "name": "anistatus",
+    "usage": 2
+  },
+  {
+    "name": "aniwal",
+    "usage": 2
+  },
+  {
+    "name": "aniwall",
+    "usage": 4
+  },
+  {
+    "name": "appstore",
+    "usage": 1
+  },
+  {
+    "name": "art",
+    "usage": 2
+  },
+  {
+    "name": "ascart",
+    "usage": 3
+  },
+  {
+    "name": "ask",
+    "usage": 2
+  },
+  {
+    "name": "autolink",
+    "usage": 1
+  },
+  {
+    "name": "autosetname",
+    "usage": 1
+  },
+  {
+    "name": "avatar",
+    "usage": 1
+  },
+  {
+    "name": "backupdata",
+    "usage": 1
+  },
+  {
+    "name": "badwords",
+    "usage": 1
+  },
+  {
+    "name": "bard",
+    "usage": 1
+  },
+  {
+    "name": "bb",
+    "usage": 1
+  },
+  {
+    "name": "bday",
+    "usage": 1
+  },
+  {
+    "name": "bet",
+    "usage": 1
+  },
+  {
+    "name": "unsent",
+    "usage": 1
+  },
+  {
+    "name": "bg",
+    "usage": 2
+  },
+  {
+    "name": "botify",
+    "usage": 2
+  },
+  {
+    "name": "setrole",
+    "usage": 1
+  },
+  {
+    "name": "chords",
+    "usage": 1
+  },
+  {
+    "name": "dalle3",
+    "usage": 1
+  },
+  {
+    "name": "dhbc",
+    "usage": 1
+  },
+  {
+    "name": "setwelcome",
+    "usage": 1
+  },
+  {
+    "name": "gen",
+    "usage": 2
+  },
+  {
+    "name": "genx",
+    "usage": 1
+  },
+  {
+    "name": "uns",
+    "usage": 1
+  },
+  {
+    "name": "grouptag",
+    "usage": 1
+  },
+  {
+    "name": "gta",
+    "usage": 2
+  },
+  {
+    "name": "hanime",
+    "usage": 1
+  },
+  {
+    "name": "imagine",
     "usage": 1
   }
 ]
