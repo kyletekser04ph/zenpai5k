@@ -53,7 +53,7 @@
   },
   {
     "name": "help",
-    "usage": 15
+    "usage": 16
   },
   {
     "name": "sauce",
@@ -109,7 +109,7 @@
   },
   {
     "name": "",
-    "usage": 25
+    "usage": 28
   },
   {
     "name": "pait",
@@ -221,7 +221,7 @@
   },
   {
     "name": "rizz",
-    "usage": 2
+    "usage": 4
   },
   {
     "name": "xenoz",
@@ -345,7 +345,7 @@
   },
   {
     "name": "clean",
-    "usage": 3
+    "usage": 4
   },
   {
     "name": "ping",
@@ -365,7 +365,7 @@
   },
   {
     "name": "uid",
-    "usage": 3
+    "usage": 4
   },
   {
     "name": "edit",
@@ -629,6 +629,18 @@
   },
   {
     "name": "imagine",
+    "usage": 1
+  },
+  {
+    "name": "kiss",
+    "usage": 1
+  },
+  {
+    "name": "marry",
+    "usage": 1
+  },
+  {
+    "name": "propose",
     "usage": 1
   }
 ]

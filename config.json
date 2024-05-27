@@ -1,7 +1,7 @@
 {
   "facebookAccount": {
-    "email": "9818942338",
-    "password": "anyaqueen",
+    "email": "9779818942338",
+    "password": "lastgod2468",
     "2FASecret": "",
     "i_user": "",
     "proxy": null,
@@ -17,16 +17,14 @@
     "ignoreCommand": []
   },
   "adminBot": [
-    "100087591006635",
-    "61556771164358",
-    "100058832546318"
+    "61556771164358"
   ],
   "whiteListMode": {
     "enable": false,
     "whiteListIds": [],
     "notes": "if you enable this feature, only the ids in the whiteListIds section can use the bot"
   },
-  "nickNameBot": "S K Y 🕊️",
+  "nickNameBot": "Anya",
   "prefix": "+",
   "database": {
     "type": "sqlite",
@@ -38,15 +36,15 @@
   "timeZone": "Asia/Ho_Chi_Minh",
   "credentials": {
     "gmailAccount": {
-      "email": "batwire187@gmail.com",
-      "clientId": "8864284320-3v8dd1uqtijifcmmg51t1j2po151si61.apps.googleusercontent.com",
-      "clientSecret": "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",
-      "refreshToken": "1//045OTpkSYZIviCgYIARAAGAQSNwF-L9Irm2r6F8_a-TDFfIbxTi-DBpTOmkZzOxqDqs9BQ8j7IGhBwJWZv-8Gfgtb-yVVr0BDiTA",
+      "email": "kramn1205@gmail.com",
+      "clientId": "407168939339-ni7uvp8054bpnht4280n6d3no4qrf3mv.apps.googleusercontent.com",
+      "clientSecret": "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",
+      "refreshToken": "1//041Aj0DBzlyxuCgYIARAAGAQSNwF-L9IrSJFfXahDmIC5CaNNthQwg0yT8ZrFaUUofZBR13qsh-nNBLi7_4LZMlZ00F8AiWo6Moo",
       "apiKey": ""
     },
     "gRecaptcha": {
-      "siteKey": "6Lde1aEoAAAAAMVeuiFxFZZUExAO7fjn5Ap18kWD",
-      "secretKey": "6Lde1aEoAAAAAHDHrY5Y39DU2QyGwInfr2mO53PC"
+      "siteKey": "6LdtgYMoAAAAABS1V6_RlEsUXf7dNLIzbc4EPhbt",
+      "secretKey": "6LdtgYMoAAAAAKXtH5f06qZBq28VXXqOb6rOSGQ5"
     }
   },
   "dashBoard": {
@@ -64,7 +62,7 @@
     }
   },
   "autoRestart": {
-    "time": null,
+    "time": false,
     "notes": "you can set time is interval with milisecond or cron time, example: 1000, 10000, 60000, 3600000, 86400000, 0 0 * * *,... docs: https://www.npmjs.com/package/node-cron. If you set time is 0 or false or null, the bot will not auto restart"
   },
   "autoUptime": {
@@ -92,8 +90,8 @@
   "notiWhenListenMqttError": {
     "notes": "This is the message when the bot is listening to the mqtt server and the mqtt server stops working due to account problems such as: locked acc, blocked due to spam,... bot will automatically send notifications to parts of your settings. You must change enable to true to use this feature. See bot/login/handlerWhenListenHasError.js file for details on how it works",
     "gmail": {
-      "enable": true,
-      "emailGetNoti": "batwire187@gmail.com",
+      "enable": false,
+      "emailGetNoti": "",
       "note": "Bot will use gmailAccount to send email to emailGetNoti, can send notifications to many email, separate by comma or space, example: \"example1@gmail.com example2@gmail.com\" (without backslash)"
     },
     "telegram": {
@@ -134,7 +132,7 @@
     "updatePresence": true,
     "listenTyping": true,
     "logLevel": "error",
-    "selfListen": true,
+    "selfListen": false,
     "selfListenEvent": true,
     "autoMarkDelivery": false,
     "autoReconnect": false,
