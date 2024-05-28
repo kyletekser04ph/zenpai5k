@@ -1,4 +1,4 @@
-3const axios = require("axios");
+const axios = require("axios");
 
 module.exports = async function (tokenFullPermission) {
 	const response1 = await axios({
