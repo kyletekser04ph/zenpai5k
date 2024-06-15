@@ -7,7 +7,7 @@ const doNotDelete = "😎 𝖪𝖸𝖫𝖤'𝖲 𝖡𝖠𝖨𝖳-𝖨𝖳 𝖠�
 
 module.exports = {
   config: {
-    name: "help",
+    name: "help2",
     version: "1.17",
     author: "NTKhang", // orginal author Kshitiz
     countDown: 0,
@@ -66,12 +66,7 @@ module.exports = {
 
       const helpListImages = [
 
-"https://i.imgur.com/WHRGiPz.gif",
-"https://i.imgur.com/zM4Hvmn.gif ",
-"https://i.imgur.com/8d6WbRJ.gif",
-"",
-"",
-"",
+"https://i.imgur.com/cAlOv8o.mp4"
 ];
 
 
