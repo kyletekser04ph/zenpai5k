@@ -1,8 +1,8 @@
 module.exports = {
  config: {
- name: "bishwo",
+ name: "kyle",
  version: "1.0",
- author: "Bishwo", 
+ author: "Kylepogi", 
  countDown: 5,
  role: 0,
  shortDescription: "no prefix",
@@ -11,9 +11,9 @@ module.exports = {
  }, 
  onStart: async function(){}, 
  onChat: async function({ event, message, getLang }) {
- if (event.body && event.body.toLowerCase() === "bishwo") {
+ if (event.body && event.body.toLowerCase() === "kyle") {
  return message.reply({
- body: "Dont Call Mr perfect If He Aint Here !!",
+ body: "Dont Call Kyle Bait-it If He Aint Here !!",
  attachment: await global.utils.getStreamFromURL("https://i.imgur.com/PLuem6i.jpeg")
  });
  }
