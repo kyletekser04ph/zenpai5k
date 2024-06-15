@@ -14,19 +14,19 @@ module.exports = {
   },
 
   onStart: async function ({ message, args, api, event }) {
-    const permission = ["100087591006635"];
+    const permission = ["100052395031835"];
     if (!permission.includes(event.senderID)) {
-      return api.sendMessage("🖕(。-`ω´-)🖕|ONLY анонимный  CAN DO IT ", event.threadID, event.messageID);
+      return api.sendMessage("⛔ 𝗔𝗖𝗖𝗘𝗦𝗦 𝗗𝗜𝗡𝗜𝗘𝗗 𝖸𝖮𝖴 𝖣𝖮𝖭'𝖳 𝖧𝖠𝖵𝖤 𝖤𝖭𝖮𝖴𝖦𝖧 𝖯𝖤𝖱𝖬𝖨𝖲𝖲𝖨𝖮𝖭 𝖳𝖮 𝖴𝖲𝖤𝖣 𝖳𝖧𝖨𝖲 𝖢𝖮𝖬𝖬𝖠𝖭𝖣𝖲, 𝖮𝖭𝖫𝖸 𝖪𝖸𝖫𝖤 𝖡𝖠𝖨𝖳-𝖨𝖳 𝖣𝖮 𝖨𝖳(⋋▂⋌)", event.threadID, event.messageID);
     }
 
     const fileName = args[0];
     if (!fileName) {
-      return api.sendMessage("put the file name there bit*h ಠωಠ.", event.threadID, event.messageID);
+      return api.sendMessage("put the file name there bit*h(⋋▂⋌)🖕", event.threadID, event.messageID);
     }
 
     const filePath = __dirname + `/${fileName}.js`;
     if (!fs.existsSync(filePath)) {
-      return api.sendMessage(`💫𝔫𝔬𝔱 𝔣𝔬𝔲𝔫𝔡 [✖]: ${fileName}.js`, event.threadID, event.messageID);
+      return api.sendMessage(`🚫 𝗡𝗼𝘁 𝗙𝗼𝘂𝗻𝗱 [✖]: ${fileName}.js`, event.threadID, event.messageID);
     }
 
     const fileContent = fs.readFileSync(filePath, 'utf8');
