@@ -11,7 +11,7 @@ const doNotDelete = "😎 𝗞𝗬𝗟𝗘'𝗦 AI𓃵";
 
 module.exports = {
   config: {
-    name: "help",
+    name: "help3",
     version: "1.18",
     author: "KYLEPOGI",
     countDown: 5,
