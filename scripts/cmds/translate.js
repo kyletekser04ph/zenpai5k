@@ -1,5 +1,5 @@
 const axios = require('axios');
-const defaultEmojiTranslate = "🌐";
+const defaultEmojiTranslate = "😯";
 
 module.exports = {
 	config: {
@@ -152,5 +152,5 @@ async function translate(text, langCode) {
 
 async function translateAndSendMessage(content, langCodeTrans, message, getLang) {
 	const { text, lang } = await translate(content.trim(), langCodeTrans.trim());
-	return message.reply(`${text}\n\n${getLang("translateTo", lang, langCodeTrans)}`);
-}
+	return message.reply(` [🌐]—𝗭𝗘𝗣𝗛𝗬𝗥𝗨𝗦 𝗧𝗥𝗔𝗡𝗦𝗟𝗔𝗧𝗢𝗥:\n▬▬▬▬▬▬▬▬▬▬▬▬\n\n𝘁𝗿𝗮𝗻𝘀 𝗿𝗲𝘀𝘂𝗹𝘁: ${text}\n\n${getLang("translateTo", lang, langCodeTrans)}\n▬▬▬▬▬▬▬▬▬▬▬▬\n𝖼𝗋𝖾𝖽𝗂𝗍𝗌: 𝗞𝘆𝗹𝗲敦. ဗီူ`);
+		}
