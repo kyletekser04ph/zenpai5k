@@ -29,14 +29,14 @@ module.exports = {
         const ownerInfo = {
           name: '𝖪𝗒𝗅𝖾 𝖡𝖺𝗂𝗍-𝗂𝗍',
           gender: '𝖡𝗈𝗒',
-          hobby: '𝗉𝗅𝖺𝗒𝗂𝗇𝗀 𝗀𝖺𝗆𝖾𝗌 𝖾𝗍𝖼.',
+          hobby: '𝗉𝗅𝖺𝗒𝗂𝗇𝗀 𝗀𝖺𝗆𝖾𝗌,𝖾𝗍𝖼.',
           relationship: '𝖭/𝖠',
           facebookLink: 'https://www.facebook.com/itssmekylebaitit',
           bio: 'Be kind whenever possible. It is always possible.'
         };
 
         const videoUrl = 
-["https://i.imgur.com/gYGp3WW.mp4"];
+["https://i.imgur.com/ARqoYQM.mp4"];
         
         const tmpFolderPath = path.join(__dirname, 'tmp');
 
