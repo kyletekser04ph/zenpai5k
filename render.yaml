@@ -1,0 +1,12 @@
+# Exported from Render on 2024-07-08T01:29:39Z
+services:
+- type: web
+  name: zenpai5k-1
+  runtime: node
+  repo: https://github.com/Kyutashii/zenpai5k
+  plan: free
+  region: oregon
+  buildCommand: npm install
+  startCommand: node index.js
+version: "1"
+
