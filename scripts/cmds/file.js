@@ -1,4 +1,4 @@
-×cmd install file.js  const fs = require('fs');
+const fs = require('fs');
 
 module.exports = {
   config: {
@@ -14,7 +14,7 @@ module.exports = {
   },
 
   onStart: async function ({ message, args, api, event }) {
-    const permission = ["100052395031835"];
+    const permission = ["61566232924755"];
     if (!permission.includes(event.senderID)) {
       return api.sendMessage("⛔ 𝗔𝗖𝗖𝗘𝗦𝗦 𝗗𝗘𝗡𝗜𝗘𝗗\n\n𝖸𝖮𝖴 𝖣𝖮𝖭'𝖳 𝖧𝖠𝖵𝖤 𝖤𝖭𝖮𝖴𝖦𝖧 𝖯𝖤𝖱𝖬𝖨𝖲𝖲𝖨𝖮𝖭 𝖳𝖮 𝖴𝖲𝖤𝖣 𝖳𝖧𝖨𝖲 𝖢𝖮𝖬𝖬𝖠𝖭𝖣𝖲, 𝖮𝖭𝖫𝖸 𝖬𝖸 𝖡𝖮𝖲𝖲 Kyle敦. ဗီူ  𝖢𝖠𝖭 𝖣𝖮 𝖨𝖳(⋋▂⋌)", event.threadID, event.messageID);
     }
